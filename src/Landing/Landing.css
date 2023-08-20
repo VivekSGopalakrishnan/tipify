@@ -105,29 +105,42 @@
     height: 100%;
     padding: 10px;
 }
-.above .custom-tooltip{
+
+.above .custom-tooltip {
     transform: rotate(180deg);
     margin-top: -150px;
 }
-.above .content-i{
-    transform: rotate(180deg) ;
+
+.above .content-i {
+    transform: rotate(180deg);
+    
 }
+
 .tooltip-container {
     width: 50%;
 }
-.tooltip-container:nth-child(2),.tooltip-container:nth-child(5),.tooltip-container:nth-child(1),.tooltip-container:nth-child(4){
+
+.tooltip-container:nth-child(2),
+.tooltip-container:nth-child(5),
+.tooltip-container:nth-child(1),
+.tooltip-container:nth-child(4) {
     height: 10%;
 }
-.tooltip-container:nth-child(1),.tooltip-container:nth-child(4){
+
+.tooltip-container:nth-child(1),
+.tooltip-container:nth-child(4) {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
 }
-.tooltip-container:nth-child(2),.tooltip-container:nth-child(5){
+
+.tooltip-container:nth-child(2),
+.tooltip-container:nth-child(5) {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
 }
+
 .tooltip-container:nth-child(3) {
     height: 80%;
     display: flex;
@@ -136,12 +149,15 @@
     flex-direction: column;
     align-items: center;
 }
-.tooltip-container:nth-child(3) .tooltip-e{
+
+.tooltip-container:nth-child(3) .tooltip-e {
     display: flex;
     justify-content: center;
     width: 100%;
 }
-.tooltip-container:nth-child(2) .tooltip-e,.tooltip-container:nth-child(5) .tooltip-e{
+
+.tooltip-container:nth-child(2) .tooltip-e,
+.tooltip-container:nth-child(5) .tooltip-e {
     display: flex;
     justify-content: right;
     width: 100%;
@@ -163,24 +179,30 @@
     font-family: 'bm';
     width: 100px;
     height: 80px;
-    
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-name: fadeIn;
+
 }
-.flex-img{
+
+.flex-img {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
-.left-t{
+
+.left-t {
     width: 30%;
     margin-right: 10px;
 }
 
-.tooltip-img{
-    height:30px;
+.tooltip-img {
+    height: 30px;
     width: 30px;
     border-radius: 50%;
 }
+
 .tooltip-arrow {
     position: absolute;
     width: 0;
@@ -192,6 +214,7 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
 
 @media (max-width:768px) {
     .landing {
@@ -221,5 +244,15 @@
 
     .button-v {
         font-size: 16px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
