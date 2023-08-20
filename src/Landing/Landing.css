@@ -208,7 +208,7 @@
 }
 
 
-@media (max-width:450px) {
+@media (max-width:768px) {
     .landing {
         display: block;
     }

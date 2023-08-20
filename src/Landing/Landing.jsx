@@ -61,9 +61,11 @@ console.log(buttonData)
                 bottom: screenHeight - buttonRect.bottom - tooltipHeight - 10,
                 left: buttonRect.left - tooltipWidth - 10,
             };
+            console.log(availableSpace)
+            console.log(tooltipHeight)
     
             if (screenWidth > 1024) {
-                if (availableSpace.bottom >= tooltipHeight) {
+                if (availableSpace.bottom >= tooltipHeight*3) {
                     setTooltipPosition('below');
                 } else if (availableSpace.top >= tooltipHeight) {
                     setTooltipPosition('above');
@@ -172,7 +174,10 @@ console.log(buttonData)
                                 <div className='tooltip-width-t'>
                                     Tooltip Width
                                 </div>
-                                <input className='tooltip-width-i' placeholder='Enter Number' type="number" min="0" ></input>
+                                <input className='tooltip-width-i' placeholder='Enter Number'
+                                onChange={(e) =>
+                                    handleFieldChange(selectedButton.id, 'tooltipWidth', e.target.value)
+                                } type="number" min="0" ></input>
                             </div>
                         </div>
                         <div className='item-c'>
@@ -229,6 +234,7 @@ console.log(buttonData)
                                                     color: selectedButton.textColor,
                                                     backgroundColor: selectedButton.backgroundColor,
                                                     borderRadius: selectedButton.cornerRadius + 'px',
+                                                    width:selectedButton.tooltipWidth + 'px',
                                                     height:"80px"
                                                    
 
