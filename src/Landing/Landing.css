@@ -85,42 +85,128 @@
     width: 320px;
     border-radius: 20px;
     position: relative;
+    overflow: hidden;
 }
 
 .inner-screen button {
     font-family: 'bm';
     font-size: 20px;
-    margin: 10px;
-    padding: 5px 10px 5px 10px;
     border-radius: 5px;
     border: none;
+    height: 40px;
+    width: 100px;
 }
 
-.button-2 {
+.inner-screen-item {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px;
+}
+
+.tooltip-container:nth-child(4) .above, .tooltip-container:nth-child(5) .above{
     position: absolute;
-    top: 0;
-    right: 0;
+    margin-top: -100px;
+}
+
+.tooltip-container:nth-child(4) .above .tooltip-arrow, .tooltip-container:nth-child(5) .above .tooltip-arrow{
+    
+    transform: rotate(180deg);
+    margin-top: 110px;
+}
+.tooltip-container:nth-child(3) .above{
+    position: absolute;
+    margin-bottom: 250px;
+}
+.tooltip-container:nth-child(3) .above .tooltip-arrow{
+    transform: rotate(180deg);
+    margin-top: 100px;
+}
+
+.tooltip-container {
+    width: 50%;
+}
+.tooltip-container:nth-child(2),.tooltip-container:nth-child(5),.tooltip-container:nth-child(1),.tooltip-container:nth-child(4){
+    height: 10%;
+}
+.tooltip-container:nth-child(1),.tooltip-container:nth-child(4){
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.tooltip-container:nth-child(2),.tooltip-container:nth-child(5){
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+.tooltip-container:nth-child(3) {
+    height: 80%;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.tooltip-container:nth-child(3) .tooltip-e{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.tooltip-container:nth-child(2) .tooltip-e,.tooltip-container:nth-child(5) .tooltip-e{
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.button-e {
+    width: 100%;
 }
 
 
-.button-3 {
+
+.custom-tooltip {
     position: absolute;
-    top: 50%;
+    background-color: #000000;
+    border-radius: 10px;
+    color: #F5F5F5;
+    padding: 10px;
+    font-family: 'bm';
+    width: 100px;
+    height: 80px;
+    
+}
+.flex-img{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.left-t{
+    width: 30%;
+    margin-right: 10px;
+}
+.left-r{
+    width: 70%;
+}
+.tooltip-img{
+    height:30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #000000;
+    top: -10px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 }
 
-.button-4 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-.button-5 {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 
 @media (max-width:450px) {
     .landing {
