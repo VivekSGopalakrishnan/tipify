@@ -28,7 +28,7 @@ const Landing = () => {
 
         reader.readAsDataURL(file);
     };
-console.log(buttonData)
+    console.log(buttonData)
     useEffect(() => {
         const savedData = JSON.parse(localStorage.getItem('buttonData')) || [];
         if (savedData.length > 0) {
@@ -41,47 +41,40 @@ console.log(buttonData)
     }, [buttonData]);
 
 
-
     const handleButtonMouseEnter = (buttonId) => {
         setShowToolkitText(true);
-    
+
         console.log(buttonId);
-        setTimeout(() => {
             const buttonElement = document.querySelector(`.${buttonId}`);
             const buttonRect = buttonElement.getBoundingClientRect();
-            const tooltipHeight = buttonRect.height; 
-            const tooltipWidth = buttonRect.width;   
-    
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
-    
+            const tooltipHeight = buttonRect.height;
+            const tooltipWidth = buttonRect.width;
+
+            const innerScreenElement = document.querySelector('.inner-screen');
+            const innerScreenRect = innerScreenElement.getBoundingClientRect();
+
             const availableSpace = {
-                top: buttonRect.top - tooltipHeight - 10,
-                right: screenWidth - buttonRect.right - tooltipWidth - 10,
-                bottom: screenHeight - buttonRect.bottom - tooltipHeight - 10,
-                left: buttonRect.left - tooltipWidth - 10,
+                top: buttonRect.top - tooltipHeight - innerScreenRect.top - 10,
+                right: innerScreenRect.right - buttonRect.right - tooltipWidth - 10,
+                bottom: innerScreenRect.bottom - buttonRect.bottom - tooltipHeight - 10,
+                left: buttonRect.left - innerScreenRect.left - tooltipWidth - 10,
             };
-            console.log(availableSpace)
-            console.log(tooltipHeight)
-    
-            if (screenWidth > 1024) {
-                if (availableSpace.bottom >= tooltipHeight*3) {
+
+            console.log(availableSpace);
+            console.log(tooltipWidth);
+
+
+
+                if (availableSpace.bottom >= tooltipHeight * 3) {
                     setTooltipPosition('below');
                 } else if (availableSpace.top >= tooltipHeight) {
                     setTooltipPosition('above');
-                } 
-            } else {
-              
-                if (availableSpace.bottom >= 10) {
-                    setTooltipPosition('below');
-                } else {
-                    setTooltipPosition('above');
                 }
-            }
-    
+            
+
             console.log(tooltipPosition)
             setTooltipContent(buttonId);
-        }, 0);
+        
     };
 
     const handleButtonMouseLeave = () => {
@@ -142,7 +135,7 @@ console.log(buttonData)
                                 <input className='padding-i' placeholder='Enter Number'
                                     value={selectedButton.padding}
                                     onChange={(e) => handleFieldChange(selectedButton.id, 'padding', e.target.value)}
-                                    type="number" min="0" />
+                                    type="number" min="0" max="15" />
                             </div>
 
                         </div>
@@ -165,19 +158,21 @@ console.log(buttonData)
                                     Corner Radius
                                 </div>
                                 <input className='corner-radius-i' placeholder='Enter Number'
+                                value={selectedButton.cornerRadius}
                                     onChange={(e) =>
                                         handleFieldChange(selectedButton.id, 'cornerRadius', e.target.value)
                                     }
-                                    type="number" min="0" ></input>
+                                    type="number" min="0" max="40" ></input>
                             </div>
                             <div className='tooltip-width'>
                                 <div className='tooltip-width-t'>
                                     Tooltip Width
                                 </div>
                                 <input className='tooltip-width-i' placeholder='Enter Number'
-                                onChange={(e) =>
-                                    handleFieldChange(selectedButton.id, 'tooltipWidth', e.target.value)
-                                } type="number" min="0" ></input>
+                                value={selectedButton.tooltipWidth}
+                                    onChange={(e) =>
+                                        handleFieldChange(selectedButton.id, 'tooltipWidth', e.target.value)
+                                    } type="number" min="0" max="170" ></input>
                             </div>
                         </div>
                         <div className='item-c'>
@@ -226,7 +221,7 @@ console.log(buttonData)
                                         {item.id}
                                     </button>
                                     {tooltipContent === item.id && (
-                                        <div className={`tooltip-e  ${tooltipPosition === 'above' ? 'above' : 'below'}`}>
+                                        <div className={`tooltip-e  ${tooltipPosition}`}>
                                             <div className='custom-tooltip' style={selectedButton.id === item.id ?
                                                 {
                                                     fontSize: selectedButton.fontsize + 'px',
@@ -234,9 +229,9 @@ console.log(buttonData)
                                                     color: selectedButton.textColor,
                                                     backgroundColor: selectedButton.backgroundColor,
                                                     borderRadius: selectedButton.cornerRadius + 'px',
-                                                    width:selectedButton.tooltipWidth + 'px',
-                                                    height:"80px"
-                                                   
+                                                    width: selectedButton.tooltipWidth + 'px',
+                                                    height: "80px",
+
 
                                                 } : {}}>
 
@@ -249,23 +244,23 @@ console.log(buttonData)
                                                             top: '-' + selectedButton.arrowHeight + 'px',
 
                                                         } : {}}></div>
-                                                        {item.image===''?<div className='no-flex'> {item.content === '' ? `Your custom tooltip content for ${item.id}` : <div className='content-i'>
+                                                {item.image === '' ? <div className='no-flex'> {item.content === '' ? <div className='content-i'>Your custom tooltip content for {item.id}</div> : <div className='content-i'>
                                                     {item.content}
                                                 </div>}
-                                                </div>:<div className='flex-img'>
+                                                </div> : <div className='flex-img'>
                                                     <div className='left-t'>
-                                                {selectedButtonId === item.id && item.image && (
-                                                    <img className='tooltip-img' src={item.image} alt={`Image for ${item.id}`} />
-                                                )}
-                                                
-                                                </div>
-                                                <div className='right-t'>
-                                                {item.content === '' ? `Your custom tooltip content for ${item.id}` : <div className='content-i'>
-                                                    {item.content}
+                                                        {selectedButtonId === item.id && item.image && (
+                                                            <img className='tooltip-img' src={item.image} alt={`Image for ${item.id}`} />
+                                                        )}
+
+                                                    </div>
+                                                    <div className='right-t'>
+                                                        {item.content === '' ? <div className='content-i'>Your custom tooltip content for {item.id}</div> : <div className='content-i'>
+                                                            {item.content}
+                                                        </div>}
+                                                    </div>
                                                 </div>}
-                                                </div>
-                                                    </div>}
-                                               
+
                                             </div>
                                         </div>
                                     )}
